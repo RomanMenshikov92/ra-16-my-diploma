@@ -1,0 +1,62 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "airbnb",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.ts?(x)"],
+      "rules": {
+        "react/jsx-filename-extension": [
+          1,
+          {
+            "extensions": [".tsx"]
+          }
+        ],
+        "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "ts": "never",
+            "tsx": "never"
+          }
+        ],
+        "react/function-component-definition": "off",
+        "no-param-reassign": "off",
+        "max-len": [
+          "error",
+          {
+            "code": 100,
+            "ignoreUrls": true,
+            "ignoreTemplateLiterals": true,
+            "ignoreStrings": true,
+            "ignoreComments": true
+          }
+        ]
+      }
+    },
+    {
+      "files": ["./backend/server.js"],
+      "rules": {
+        "react/jsx-filename-extension": "off",
+        "import/extensions": "off",
+        "react/function-component-definition": "off",
+        "no-param-reassign": "off",
+        "max-len": "off"
+      }
+    }
+  ],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  }
+}
