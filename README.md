@@ -96,9 +96,9 @@ const fortune = (ctx, body = null, status = 200) => {
 
 Навигационным центром приложения являются шапка и футер каждого экрана (страницы):
 
-![Header](./assets/header-menu.png)
+![Header](./res/header-menu.png)
 
-![Footer](./assets/footer-menu.png)
+![Footer](./res/footer-menu.png)
 
 Из шапки можно попасть на следующие экраны:
 
@@ -119,17 +119,17 @@ const fortune = (ctx, body = null, status = 200) => {
 
 Экран «Главная страница» доступен по умолчанию при открытии приложения.
 
-![Frontpage](./assets/index-loading.png)
+![Frontpage](./res/index-loading.png)
 
 При загрузке любых данных с помощью сетевых запросов должен отображаться лоадер. У каждого виджета лоадер свой, то есть у вас не должно быть одного лоадера на всё приложение.
 
 После загрузки страница выглядит следующим образом:
 
-![Frontpage](./assets/index-loaded.png)
+![Frontpage](./res/index-loaded.png)
 
 Общая схема:
 
-![Frontpage](./assets/index-loaded-comments.png)
+![Frontpage](./res/index-loaded-comments.png)
 
 Вам нужно реализовать:
 
@@ -149,7 +149,7 @@ const fortune = (ctx, body = null, status = 200) => {
 
 Экран «Каталог товаров» должен выглядеть следующим образом:
 
-![Catalog](./assets/catalog.png)
+![Catalog](./res/catalog.png)
 
 Фактически он полностью повторяет функциональность каталога на главной странице, за одним исключением: у него есть поле поиска.
 
@@ -163,15 +163,15 @@ const fortune = (ctx, body = null, status = 200) => {
 
 На всех страницах в шапке присутствует виджет поиска:
 
-![Search](./assets/search-comments.png)
+![Search](./res/search-comments.png)
 
 По умолчанию поисковое поле скрыто, отображается только иконка:
 
-![Search](./assets/search-closed.png)
+![Search](./res/search-closed.png)
 
 Эта иконка должна работать следующим образом: при первом клике открывает строку поиска, при втором, если был введён какой-то текст, то перенаправляет пользователя на страницу каталога (/catalog.html), при этом в поисковом поле должен быть отображён тот же текст, что был ввёден в строку поиска в шапке, и загрузка данных должна происходить исходя из этого:
 
-![Search](./assets/search-catalog-comments.png)
+![Search](./res/search-catalog-comments.png)
 
 Поиск на сервере работает по точному совпадению цвета без учёта регистра, например, «чёрный», и по содержанию слова для названия без учёта регистра, например, можно найти «жар» в «Туфли Жар-птицы».
 
@@ -185,13 +185,13 @@ const fortune = (ctx, body = null, status = 200) => {
 
 Страница товара выглядит следующим образом:
 
-![Item](./assets/catalog-item.png)
+![Item](./res/catalog-item.png)
 
 Страница открывается при нажатии кнопок «Заказать» в карточках товаров. URL — /catalog/:id.html. Где id — это ID товара.
 
 На ней интерес представляет только блок самого товара:
 
-![Item](./assets/catalog-item-comments.png)
+![Item](./res/catalog-item-comments.png)
 
 Ключевые моменты:
 
@@ -212,7 +212,7 @@ const fortune = (ctx, body = null, status = 200) => {
 
 Корзина выглядит следующим образом:
 
-![Cart](./assets/cart-comments.png)
+![Cart](./res/cart-comments.png)
 
 Блок «Корзина» отображает товары, находящиеся в корзине. Все товары хранятся локально в localStorage. Товар можно удалить из корзины, тогда он должен удалиться и из localStorage тоже.
 
@@ -224,7 +224,7 @@ const fortune = (ctx, body = null, status = 200) => {
 
 Соответственно, виджет корзинки отображает количество позиций в корзине:
 
-![Cart](./assets/cart-widget.png)
+![Cart](./res/cart-widget.png)
 
 Если в корзине товаров нет вообще, то розового индикатора с числом тоже быть не должно.
 
