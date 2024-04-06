@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, setQuery } from '../../store/thunk/productsThunk';
 import { AppDispatch } from '../../store/store';
@@ -11,7 +11,11 @@ export const SearchCatalog: React.FC = (): JSX.Element => {
   const query = useSelector(selectSearchQuery);
   const [searchText, setSearchText] = useState<string>(query || '');
 
-  const handleSearch = (e: string) => {
+  useEffect(() => {
+    setSearchText(query || '');
+  }, [query]);
+
+  const handleSearch = (e: string): void => {
     setSearchText(e);
     if (e.trim().length === 0) {
       dispatch(setQuery(''));

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,11 +24,17 @@ export const Search: React.FC = (): JSX.Element => {
       dispatch(setQuery(searchText));
       dispatch(fetchProducts({ offset: 0, query: searchText, category: selectedCategory }));
       navigate('/catalog/');
+    } else {
+      setSearchVisible(!isSearchVisible);
+      if (!isSearchVisible && searchInput.current) {
+        searchInput.current.focus();
+      }
     }
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>): void => {
     if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
       handleSearchClick();
     }
   };
@@ -56,6 +61,7 @@ export const Search: React.FC = (): JSX.Element => {
           value={searchText}
           ref={searchInput}
           onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={handleKeyPress}
         />
       </form>
     </>
