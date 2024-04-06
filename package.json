@@ -2,8 +2,6 @@
   "name": "ra16-my-diploma",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://RomanMenshikov92.github.io/ra-16-my-diploma",
-  "repository": "https://github.com/RomanMenshikov92/ra-16-my-diploma.git",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
     "@testing-library/jest-dom": "^5.17.0",

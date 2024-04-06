@@ -1,5 +1,5 @@
 import React from 'react';
-import { BannerProps } from '../types/types';
+import { BannerProps } from '../../types/types';
 
 export function Banner({ src, alt }: BannerProps): JSX.Element {
   return (

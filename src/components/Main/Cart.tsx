@@ -1,8 +1,9 @@
 import React from 'react';
+import { Title } from './Title';
 
 export const Cart: React.FC = () => (
   <section className="cart">
-    <h2 className="my-3 text-center">Корзина</h2>
+    <Title classes="my-3 text-center" title="Корзина" />
     <table className="table table-bordered">
       <thead>
         <tr>

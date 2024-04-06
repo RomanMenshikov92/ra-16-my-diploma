@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { Title } from './Title';
 
 export const Order: React.FC = () => (
   <section className="order">
-    <h2 className="my-3 text-center">Оформить заказ</h2>
+    <Title classes="my-3 text-center" title="Оформить заказ" />
     <div className="card" style={{ maxWidth: '30rem', margin: '0 auto' }}>
       <form className="card-body">
         <div className="form-group mb-2">
@@ -16,7 +17,9 @@ export const Order: React.FC = () => (
         </div>
         <div className="form-group form-check mb-2">
           <input type="checkbox" className="form-check-input" id="agreement" />
-          <label htmlFor="agreement" className="form-check-label">Согласен с правилами доставки</label>
+          <label htmlFor="agreement" className="form-check-label">
+            Согласен с правилами доставки
+          </label>
         </div>
         <button type="submit" className="btn btn-outline-secondary">
           Оформить

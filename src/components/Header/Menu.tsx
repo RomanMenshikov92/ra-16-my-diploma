@@ -7,22 +7,22 @@ export const Menu: React.FC = (): JSX.Element => {
   return (
     <ul className="navbar-nav mr-auto">
       <li className={activeLink({ isActive: true })}>
-        <NavLink className="nav-link" to="/ra-16-my-diploma" end>
+        <NavLink className="nav-link" to="/" end>
           Главная
         </NavLink>
       </li>
       <li className={activeLink({ isActive: false })}>
-        <NavLink className="nav-link" to="/ra-16-my-diploma/catalog">
+        <NavLink className="nav-link" to="/catalog">
           Каталог
         </NavLink>
       </li>
       <li className={activeLink({ isActive: false })}>
-        <NavLink className="nav-link" to="/ra-16-my-diploma/about">
+        <NavLink className="nav-link" to="/about">
           О магазине
         </NavLink>
       </li>
       <li className={activeLink({ isActive: false })}>
-        <NavLink className="nav-link" to="/ra-16-my-diploma/contact">
+        <NavLink className="nav-link" to="/contact">
           Контакты
         </NavLink>
       </li>

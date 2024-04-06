@@ -15,14 +15,13 @@ import './App.css';
 function App(): JSX.Element {
   return (
     <Routes>
-      <Route path="/ra-16-my-diploma" element={<Layout />}>
-        <Route index path="/ra-16-my-diploma" element={<MainPage />} />
-        <Route path="/ra-16-my-diploma/catalog" element={<CatalogPage />}>
-          <Route path="/ra-16-my-diploma/catalog/:id" element={<ProductPage />} />
-        </Route>
-        <Route path="/ra-16-my-diploma/about" element={<AboutPage />} />
-        <Route path="/ra-16-my-diploma/contact" element={<ContactPage />} />
-        <Route path="/ra-16-my-diploma/basket" element={<BasketPage />} />
+      <Route path="/" element={<Layout />}>
+        <Route index path="/" element={<MainPage />} />
+        <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/catalog/:id" element={<ProductPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/basket" element={<BasketPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

@@ -1,6 +1,6 @@
 # Дипломный проект курса «React»
 
-## [GutHub Pages](https://romanmenshikov92.github.io/ra-16-my-diploma)
+<!-- ## [GutHub Pages](https://romanmenshikov92.github.io/ra-16-my-diploma) -->
 
 Дипломный проект представляет собой интернет-магазин обуви. Задача заключается в создании работающего приложения, всеми основными функциями которого можно пользоваться.
 
