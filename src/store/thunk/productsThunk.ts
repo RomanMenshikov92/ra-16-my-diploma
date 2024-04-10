@@ -10,7 +10,7 @@ import {
   setProductsTopSalesEnd,
   setProductSearchQuery,
 } from '../slice/productsSlice';
-import { AppDispatch, RootState } from '../store';
+import { AppDispatch } from '../store';
 import { FetchProductDetailsArgs, FetchProductsArgs, Product } from '../../types/types';
 
 const apiItemsUrl: string = process.env.REACT_APP_API_URL_ITEMS || '';
