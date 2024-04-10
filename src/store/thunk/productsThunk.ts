@@ -28,7 +28,6 @@ export const fetchProducts = createAsyncThunk(
       const offsetParam = offset ? `&offset=${offset}` : '';
       const path = `${apiItemsUrl}?${queryParam}${categoryParam}${offsetParam}`;
       const response = await fetch(path);
-      console.log(response.url);
       if (!response.ok) {
         throw new Error(response.statusText);
       }
@@ -96,11 +95,3 @@ export const fetchTopSales = createAsyncThunk('productsTopSales/fetchTopSales', 
 export const setQuery = (str: string) => (dispatch: AppDispatch) => {
   dispatch(setProductSearchQuery(str));
 };
-
-export const selectLoading = (state: RootState): boolean => state.products.loading;
-export const selectError = (state: RootState): string | null => state.products.error;
-export const selectProducts = (state: RootState): Product[] => state.products.products;
-export const selectIsNextProducts = (state: RootState): boolean => state.products.isAllLoaded;
-export const selectProductsDetails = (state: RootState): Product | null => state.products.productsDetails;
-export const selectProductsTopSales = (state: RootState): Product[] => state.products.productsTopSales;
-export const selectSearchQuery = (state: RootState): string => state.products.searchQuery;

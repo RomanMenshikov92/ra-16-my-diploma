@@ -1,48 +1,44 @@
 import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
-import { Product, CartState, RootState } from '../../types/types';
+import { CartState, RootState, CartProduct } from '../../types/types';
 
 const initialState: CartState = {
   loading: false,
   error: null,
-  data: [],
-  totalItems: 0,
+  message: null,
+  cart: [],
+  totalItemsCount: null,
 };
 
 const cartSlice: Slice<CartState> = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    getDataLoading(state) {
-      state.loading = false;
-      state.error = null;
+    setLoading(state, action: PayloadAction<boolean>) {
+      state.loading = action.payload;
     },
-    getDataError(state, action: PayloadAction<string>) {
-      state.loading = false;
+    setError(state, action: PayloadAction<string | null>) {
       state.error = action.payload;
     },
-    getDataList(state) {
-      state.loading = true;
-      state.error = null;
-      state.data = [];
+    setMessage(state, action: PayloadAction<string | null>) {
+      state.message = action.payload;
     },
-    getDataListSuccess(state, action: PayloadAction<Product[]>) {
-      state.loading = true;
-      state.error = null;
-      state.data = action.payload;
+    setCartList(state, action: PayloadAction<CartProduct[]>) {
+      state.cart = action.payload;
     },
-    getTotalItems(state, action: PayloadAction<number>) {
-      state.totalItems = action.payload;
+    setTotalItemsCount(state, action: PayloadAction<number | null>) {
+      state.totalItemsCount = action.payload;
     },
   },
 });
 
 export const {
-  getDataLoading, getDataError, getDataList, getDataListSuccess,
+  setCartList, setTotalItemsCount, setLoading, setError, setMessage,
 } = cartSlice.actions;
 
+export const selectCart = (state: RootState): CartProduct[] => state.cart.cart;
+export const selectTotalItems = (state: RootState): number | null => state.cart.totalItemsCount;
 export const selectLoading = (state: RootState): boolean => state.cart.loading;
 export const selectError = (state: RootState): string | null => state.cart.error;
-export const selectData = (state: RootState): Product[] => state.cart.data;
-export const selectTotalItems = (state: RootState): number | null => state.cart.totalItems;
+export const selectMessage = (state: RootState): string | null => state.cart.message;
 
 export default cartSlice.reducer;

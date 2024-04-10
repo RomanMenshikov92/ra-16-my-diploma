@@ -23,7 +23,7 @@ export const TopSales: React.FC = () => {
     }
   }, [dispatch, topSales.length, loading, error]);
 
-  if (topSales.length === 0 || error) {
+  if (error) {
     return null;
   }
 

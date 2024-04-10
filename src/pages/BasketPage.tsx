@@ -1,13 +1,9 @@
 import React from 'react';
-import { Order } from '../components/Main/Order';
-import { Cart } from '../components/Main/Cart';
+import { CartOrder } from '../components/Main/CartOrder';
 
 export function BasketPage(): JSX.Element {
   return (
-    <>
-      <Cart />
-      <Order />
-    </>
+    <CartOrder />
   );
 }
 

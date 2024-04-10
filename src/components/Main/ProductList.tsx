@@ -13,34 +13,29 @@ import { AppDispatch } from '../../store/store';
 import { ProductItem } from './ProductItem';
 import { selectSelectedCategory } from '../../store/slice/categoriesSlice';
 import { ButtonLoadMore } from './ButtonLoadMore';
-import { Loader } from './Loader';
-import { Error } from './Error';
 
 export const ProductList: React.FC = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const products = useSelector(selectProducts);
-  const loading = useSelector(selectProductsLoading);
-  const error = useSelector(selectProductsError);
+  const loadingCatalog = useSelector(selectProductsLoading);
+  const errorCatalog = useSelector(selectProductsError);
   const selectedCategory = useSelector(selectSelectedCategory);
   const query = useSelector(selectSearchQuery);
 
   useEffect(() => {
-    if (!loading && !error && products.length === 0) {
+    if (!loadingCatalog && !errorCatalog && products.length === 0) {
       dispatch(fetchProducts({ offset: 0, query, category: selectedCategory }));
     }
-  }, [dispatch, loading, error, products.length, selectedCategory, query]);
+  }, [dispatch, loadingCatalog, errorCatalog, products.length, selectedCategory, query]);
 
   const handleClick = (id: number): void => {
     dispatch(fetchProductsDetails({ id, offset: 0, category: '' }));
     navigate(`/catalog/${id}`);
   };
-
   return (
-    <>
-      {loading && !error && <Loader />}
-      {error && !loading && <Error />}
-      {products && products.length > 0 && !error && !loading ? (
+    <div>
+      {products && products.length > 0 && !errorCatalog && !loadingCatalog ? (
         <>
           <ul className="row list-unstyled p-0">
             {products.map((item: Product) => (
@@ -50,9 +45,9 @@ export const ProductList: React.FC = (): JSX.Element => {
           <ButtonLoadMore />
         </>
       ) : (
-        <p className="p-5 text-center fs-1">Ничего не найдено</p>
+        !loadingCatalog && !errorCatalog && <p className="p-5 text-center fs-1">Ничего не найдено</p>
       )}
-    </>
+    </div>
   );
 };
 

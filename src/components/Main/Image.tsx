@@ -4,7 +4,7 @@ import { ProductDetails } from '../../types/types';
 export const Image: React.FC<ProductDetails> = ({ productDetails, classes }: ProductDetails) => {
   const placeholderImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/660px-No-Image-Placeholder.svg.png';
 
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>): void => {
     e.currentTarget.src = placeholderImage;
   };
 

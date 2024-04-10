@@ -25,6 +25,15 @@ export interface Category {
   title: string;
 }
 
+export interface CartProduct {
+  id: number;
+  nano: string;
+  title: string;
+  selectedSize: string;
+  selectedQuantity: number;
+  price: number;
+}
+
 export interface ProductDetails {
   productDetails: Product;
   classes?: string;
@@ -45,6 +54,10 @@ export interface LogoProps {
   alt: string;
 }
 
+export interface BasketProps {
+  count: number | null;
+}
+
 export interface TitleProps {
   title: string;
   classes: string;
@@ -60,10 +73,41 @@ export interface ButtonOrderProps {
   onClick: () => void;
 }
 
+export interface QuantityProps {
+  onQuantityChange: (quantity: number) => void;
+  disabled: boolean;
+}
+
 export interface ButtonCartProps {
   text: string;
   onClick: () => void;
   disabled: boolean;
+}
+
+export interface TableCartProps {
+  data: CartProduct[];
+  totalPrice: number;
+  onDelete: (nanoId: string) => void;
+}
+
+export interface FormOrderProps {
+  handleOrder: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+export interface ErrorProps {
+  error: string;
+}
+
+export interface OrderData {
+  owner: {
+    phone: string;
+    address: string;
+  };
+  items: {
+    id: number;
+    price: number;
+    count: number;
+  }[];
 }
 
 export interface FetchProductsArgs {
@@ -98,8 +142,9 @@ export interface CategoriesState {
 export interface CartState {
   loading: boolean;
   error: string | null;
-  data: Product[];
-  totalItems: number | null;
+  message: string | null;
+  cart: CartProduct[];
+  totalItemsCount: number | null;
 }
 
 export interface RootState {

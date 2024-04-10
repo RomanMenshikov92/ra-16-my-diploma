@@ -37,8 +37,8 @@ export const CategoryFilter: React.FC = (): JSX.Element => {
   return (
     <>
       {loading && !error && <Loader />}
-      {error && !loading && <Error />}
-      {categories && categories.length >= 1 && hasAllCategory && !loading && !error && (
+      {error && !loading && <Error error={error} />}
+      {categories && categories.length > 1 && !loading && !error && (
         <ul className="catalog-categories nav justify-content-center">
           {categories.map((category) => (
             <li key={category.id} className="nav-item">

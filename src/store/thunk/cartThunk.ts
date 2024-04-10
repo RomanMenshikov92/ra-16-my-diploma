@@ -1,30 +1,38 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-// import {
-//   getProductsList,
-//   getProductsListSuccess,
-//   getProductsListFailure,
-//   getProductDetails,
-//   getProductDetailsSuccess,
-//   getProductDetailsFailure,
-//   getTopSalesList,
-//   getTopSalesListSuccess,
-//   getTopSalesListFailure,
-// } from '../slice/productsSlice';
-// import { RootState } from '../store';
-// import { Product } from '../../types/types';
+import {
+  setCartList, setTotalItemsCount, setLoading, setError, setMessage,
+} from '../slice/cartSlice';
+import { AppDispatch } from '../store';
+import { CartProduct, OrderData } from '../../types/types';
 
 const apiOrderUrl: string = process.env.REACT_APP_API_URL_ORDER || '';
 
-// eslint-disable-next-line import/prefer-default-export
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
-  async () => {
-    try { /* empty */ } catch (error) { /* empty */ }
-  },
-);
+export const setCount = (number: number | null) => (dispatch: AppDispatch) => {
+  dispatch(setTotalItemsCount(number));
+};
 
-// export const selectProducts = (state: RootState): Product[] => state.products.products;
-// export const selectProductDetails = (state: RootState): Product | null => state.products.productDetails;
-// export const selectTopSales = (state: RootState): Product[] => state.products.topSales;
-// export const selectLoading = (state: RootState): boolean => state.products.loading;
-// export const selectError = (state: RootState): string | null => state.products.error;
+export const setCartItems = (obj: CartProduct) => (dispatch: AppDispatch) => {
+  dispatch(setCartList(obj));
+};
+
+export const sendOrder = (orderData: OrderData) => async (dispatch: AppDispatch) => {
+  dispatch(setLoading(true));
+  try {
+    const response = await fetch(`${apiOrderUrl}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    if (response.ok) {
+      dispatch(setMessage('Заказ успешно оформлен!'));
+      dispatch(setCartList([]));
+    } else {
+      throw new Error('Ошибка оформления заказа');
+    }
+  } catch (error) {
+    dispatch(setError((error as Error).message));
+  }
+  dispatch(setLoading(false));
+};

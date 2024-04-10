@@ -1,11 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Logo } from './Header/Logo';
 import headerLogo from '../assets/img/header-logo.png';
 import { Menu } from './Header/Menu';
 import { Basket } from './Header/Basket';
 import { Search } from './Header/Search';
+import { selectTotalItems } from '../store/slice/cartSlice';
 
 export function Header(): JSX.Element {
+  const totalCount = useSelector(selectTotalItems);
+
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <Logo src={headerLogo} alt="Bosa Noga" />
@@ -13,7 +17,7 @@ export function Header(): JSX.Element {
         <Menu />
         <div className=" header-controls-pics ms-auto">
           <Search />
-          <Basket />
+          <Basket count={totalCount} />
         </div>
       </div>
     </nav>
