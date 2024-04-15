@@ -96,6 +96,7 @@ export interface FormOrderProps {
 
 export interface ErrorProps {
   error: string;
+  handleRetry?: () => void;
 }
 
 export interface OrderData {
@@ -126,6 +127,7 @@ export interface ProductsState {
   loading: boolean;
   error: string | null;
   searchQuery: string;
+  searchResult: boolean;
   products: Product[];
   isAllLoaded: boolean;
   productsTopSales: Product[];

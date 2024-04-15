@@ -9,6 +9,7 @@ const initialState: ProductsState = {
   isAllLoaded: false,
   productsTopSales: [],
   productsDetails: null,
+  searchResult: true,
 };
 
 const productsSlice: Slice<ProductsState> = createSlice({
@@ -59,6 +60,9 @@ const productsSlice: Slice<ProductsState> = createSlice({
     },
     setProductSearchQuery: (state, action: PayloadAction<string>) => {
       state.searchQuery = action.payload;
+    },
+    setProductsSearchResultsFound: (state, action: PayloadAction<boolean>) => {
+      state.searchResult = action.payload;
     },
   },
 });

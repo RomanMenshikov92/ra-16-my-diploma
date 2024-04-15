@@ -1,14 +1,23 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Logo } from './Header/Logo';
 import headerLogo from '../assets/img/header-logo.png';
 import { Menu } from './Header/Menu';
 import { Basket } from './Header/Basket';
 import { Search } from './Header/Search';
 import { selectTotalItems } from '../store/slice/cartSlice';
+import getStorageItems from '../store/localStorage/localStorage';
+import { setCount } from '../store/thunk/cartThunk';
+import { AppDispatch } from '../store/store';
 
 export function Header(): JSX.Element {
+  const dispatch: AppDispatch = useDispatch();
   const totalCount = useSelector(selectTotalItems);
+
+  useEffect(() => {
+    const items = getStorageItems();
+    dispatch(setCount(items.length));
+  });
 
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">

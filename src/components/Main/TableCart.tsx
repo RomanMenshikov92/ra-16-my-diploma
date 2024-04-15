@@ -16,9 +16,9 @@ export const TableCart: React.FC<TableCartProps> = ({ data, totalPrice, onDelete
       </tr>
     </thead>
     <tbody>
-      {data.map((item: CartProduct) => (
+      {data.map((item: CartProduct, index: number) => (
         <tr key={item.nano}>
-          <td>{item.id}</td>
+          <td>{index + 1}</td>
           <td>
             <Link to={`/catalog/${item.id}`}>{item.title}</Link>
           </td>

@@ -22,9 +22,8 @@ export const CartOrder: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     setTotalPrice(storage.reduce((prev: number, next: CartProduct) => prev + next.price * next.selectedQuantity, 0));
-    const count = storage.reduce((prev: number, next: CartProduct) => prev + next.selectedQuantity, 0);
+    const count = storage.length;
     dispatch(setCount(count));
-    localStorage.setItem('totalCount', JSON.stringify(count));
   }, [dispatch, storage]);
 
   const hanldeDelete = (nanoId: string): void => {
@@ -47,7 +46,6 @@ export const CartOrder: React.FC = (): JSX.Element => {
     };
     dispatch(sendOrder(orderData)).then(() => {
       localStorage.removeItem('items');
-      localStorage.removeItem('totalCount');
       setStorage([]);
     });
   };

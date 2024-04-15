@@ -10,6 +10,7 @@ export const SearchCatalog: React.FC = (): JSX.Element => {
   const selectedCategory = useSelector(selectSelectedCategory);
   const query = useSelector(selectSearchQuery);
   const [searchText, setSearchText] = useState<string>(query || '');
+  const [searchRes, setSearchRes] = useState<boolean>(false);
 
   useEffect(() => {
     setSearchText(query || '');
@@ -17,12 +18,20 @@ export const SearchCatalog: React.FC = (): JSX.Element => {
 
   const handleSearch = (e: string): void => {
     setSearchText(e);
+    // setSearchRes(false);
     if (e.trim().length === 0) {
       dispatch(setQuery(''));
       dispatch(fetchProducts({ offset: 0, query: '', category: selectedCategory }));
     } else if (e.trim().length > 3) {
       dispatch(setQuery(e));
       dispatch(fetchProducts({ offset: 0, query: e, category: selectedCategory }));
+    }
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleSearch(event.currentTarget.value);
     }
   };
 
@@ -33,6 +42,7 @@ export const SearchCatalog: React.FC = (): JSX.Element => {
         placeholder="Поиск"
         value={searchText}
         onChange={(e) => handleSearch(e.target.value)}
+        onKeyDown={handleKeyPress}
       />
     </form>
   );
