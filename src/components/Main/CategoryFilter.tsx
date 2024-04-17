@@ -11,7 +11,7 @@ import {
   selectSelectedCategory,
 } from '../../store/slice/categoriesSlice';
 import { fetchProducts } from '../../store/thunk/productsThunk';
-import { selectSearchQuery, setProductsListStart } from '../../store/slice/productsSlice';
+import { selectSearchQuery, setProductsListLoading, setProductsListStart } from '../../store/slice/productsSlice';
 
 export const CategoryFilter: React.FC = (): JSX.Element => {
   const dispatch: AppDispatch = useDispatch();
@@ -29,15 +29,23 @@ export const CategoryFilter: React.FC = (): JSX.Element => {
   }, [dispatch, loading, error, categories.length, hasAllCategory, query, selectedCategory]);
 
   const handleCategoryClick = (categoryId: string): void => {
+    dispatch(setProductsListLoading(true));
     dispatch(setProductsListStart({}));
     dispatch(setCategories(categoryId));
     dispatch(fetchProducts({ offset: 0, query, category: categoryId }));
+    dispatch(setProductsListLoading(false));
+  };
+
+  const handleRetry = () => {
+    dispatch(setProductsListLoading(true));
+    dispatch(fetchCategories());
+    dispatch(setProductsListLoading(false));
   };
 
   return (
     <>
       {loading && !error && <Loader />}
-      {error && !loading && <Error error={error} />}
+      {error && !loading && <Error error={error} handleRetry={handleRetry} />}
       {categories && categories.length > 1 && !loading && !error && (
         <ul className="catalog-categories nav justify-content-center">
           {categories.map((category) => (

@@ -6,6 +6,7 @@ import {
   selectProductsError,
   selectProducts,
   selectSearchQuery,
+  setProductsListLoading,
 } from '../../store/slice/productsSlice';
 import { fetchProducts, fetchProductsDetails } from '../../store/thunk/productsThunk';
 import { Product } from '../../types/types';
@@ -25,40 +26,40 @@ export const ProductList: React.FC = (): JSX.Element => {
   const selectedCategory = useSelector(selectSelectedCategory);
   const query = useSelector(selectSearchQuery);
 
-  // useEffect(() => {
-  //   if (!loadingCatalog && !errorCatalog && products.length === 0) {
-  //     dispatch(fetchProducts({ offset: 0, query, category: selectedCategory }));
-  //   }
-  // }, [dispatch, loadingCatalog, errorCatalog, products.length, selectedCategory, query]);
-  // console.log(products);
-  // console.log(loadingCatalog);
-  // console.log(errorCatalog);
+  useEffect(() => {
+    if (!loadingCatalog && !errorCatalog && products.length === 0) {
+      dispatch(fetchProducts({ offset: 0, query, category: selectedCategory }));
+    }
+  }, [dispatch, loadingCatalog, errorCatalog, products.length, selectedCategory, query]);
+
   const handleClick = (id: number): void => {
     dispatch(fetchProductsDetails({ id, offset: 0, category: '' }));
     navigate(`/catalog/${id}`);
   };
+
+  const handleRetry = () => {
+    dispatch(setProductsListLoading(true));
+    dispatch(fetchProducts({ offset: 0, query, category: selectedCategory }));
+    dispatch(setProductsListLoading(false));
+  };
+
   return (
     <div>
-      {/* {loadingCatalog && products.length === 0 && <Loader />}
-      {errorCatalog && products.length === 0 && <Error error={errorCatalog} />} */}
-      {/* {
-        products && products.length > 0 && !loadingCatalog && !errorCatalog ? (
-          <> */}
-      <ul className="row list-unstyled p-0">
-        {products.map((item: Product) => (
-          <ProductItem key={item.id} product={item} handleClick={handleClick} />
-        ))}
-      </ul>
-      <ButtonLoadMore />
-      {/* </>
-        ) : (
-          <p className="p-5 text-center fs-1">Ничего не найдено</p>
-          // <Loader />
-        )
-      } */}
-      {/* {products && products.length > 0 && !loadingCatalog && !errorCatalog && searchResultsFound && (
-        <p className="p-5 text-center fs-1">Ничего не найдено</p>
-      )} */}
+      {loadingCatalog && !errorCatalog && <Loader />}
+      {errorCatalog && !loadingCatalog && <Error error={errorCatalog} handleRetry={handleRetry} />}
+      {products && products.length > 0 ? (
+        <>
+          <ul className="row list-unstyled p-0">
+            {products.map((item: Product) => (
+              <ProductItem key={item.id} product={item} handleClick={handleClick} />
+            ))}
+          </ul>
+          <ButtonLoadMore />
+        </>
+      ) : (
+        // <p className="p-5 text-center fs-1">Ничего не найдено</p>
+        <Loader />
+      )}
     </div>
   );
 };

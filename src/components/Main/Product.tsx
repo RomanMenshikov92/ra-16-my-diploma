@@ -71,10 +71,16 @@ export function Product(): JSX.Element {
     navigate('/basket');
   };
 
+  const handleRetry = () => {
+    if (id) {
+      dispatch(fetchProductsDetails({ id, offset: '', category: '' }));
+    }
+  };
+
   return (
     <section className="catalog-item">
       {loadingDetails && <Loader />}
-      {errorDetails && <Error error={errorDetails} />}
+      {errorDetails && <Error error={errorDetails} handleRetry={handleRetry} />}
       {productDetails ? (
         <>
           <Title classes="text-center" title={productDetails.title} />

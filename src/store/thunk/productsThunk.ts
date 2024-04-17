@@ -9,6 +9,7 @@ import {
   setProductsTopSalesStart,
   setProductsTopSalesEnd,
   setProductSearchQuery,
+  setProductsListLoading,
 } from '../slice/productsSlice';
 import { AppDispatch } from '../store';
 import { FetchProductDetailsArgs, FetchProductsArgs, Product } from '../../types/types';
@@ -28,11 +29,13 @@ export const fetchProducts = createAsyncThunk(
       const offsetParam = offset ? `&offset=${offset}` : '';
       const path = `${apiItemsUrl}?${queryParam}${categoryParam}${offsetParam}`;
       const response = await fetch(path);
+      dispatch(setProductsListLoading(true));
       if (!response.ok) {
         throw new Error(response.statusText);
       }
       const data: Product[] = await response.json();
       if (response.status === 200) {
+        dispatch(setProductsListLoading(false));
         if (offset === 0) {
           dispatch(setProductsListStart({}));
           dispatch(setProductsListEnd(data));
@@ -42,6 +45,7 @@ export const fetchProducts = createAsyncThunk(
       } else {
         dispatch(setProductsListError(response.statusText));
       }
+      dispatch(setProductsListLoading(false));
     } catch (error) {
       dispatch(setProductsListError((error as Error).message));
     }

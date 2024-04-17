@@ -16,24 +16,28 @@ const productsSlice: Slice<ProductsState> = createSlice({
   name: 'products',
   initialState,
   reducers: {
+    setProductsListLoading(state, action: PayloadAction<boolean>) {
+      state.error = null;
+      state.loading = action.payload;
+    },
     setProductsListError(state, action: PayloadAction<string | null>) {
       state.loading = false;
       state.error = action.payload;
     },
     setProductsListStart(state) {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
       state.products = [];
       state.isAllLoaded = false;
     },
     setProductsListEnd(state, action: PayloadAction<Product[]>) {
-      state.loading = false;
+      // state.loading = false;
       state.error = null;
       state.products = action.payload;
       state.isAllLoaded = action.payload.length < 6;
     },
     setProductsListOffset(state, action: PayloadAction<Product[]>) {
-      state.loading = false;
+      // state.loading = false;
       state.error = null;
       state.products = [...state.products, ...action.payload];
       state.isAllLoaded = action.payload.length < 6;
@@ -68,6 +72,7 @@ const productsSlice: Slice<ProductsState> = createSlice({
 });
 
 export const {
+  setProductsListLoading,
   setProductsListError,
   setProductsListStart,
   setProductsListEnd,
